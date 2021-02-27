@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  selector:
+    matchLabels:
+      app: comments
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+      - name: comments
+        image: hyderdevelops/comments:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-srv
+spec:
+  selector:
+    app: comments
+  type: ClusterIP
+  ports:
+    - name: comments-port
+      protocol: TCP
+      port: 4002
+      targetPort: 4002
+
+

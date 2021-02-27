@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+
   name: simpleweb-depl
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: simpleweb
@@ -14,5 +14,11 @@ spec:
     spec:
       containers:
       - name: simpleweb
-        image: hyder/simpleweb:0.0.2
-        
+        image: hyderdevelops/simpleweb:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+       
